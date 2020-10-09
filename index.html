@@ -25,12 +25,12 @@
         <div class="slides">
             <section data-background-video="bgm.mp4" data-background-video-loop data-background-video-muted style="text-align: left;">
                 <h2 style="color: white">Python Programming</h2>
-                <h5 style="color: white">Lecture 7 Advanced Functions </h5>
+                <h5 style="color: white">Lecture 7 Functions, Modules</h5>
             </section>
             <section>
                 <section data-background="#2980b9" style="color: white">
                     <h2 style="color: white">7.1 Functions (3)</h2>
-                    <p>arbitrary arguments, generator, Lambda function</p>
+                    <h5>arbitrary arguments, generator, Lambda function</h5>
                 </section>
                 <section>
                     <div class="fragment">
@@ -93,7 +93,6 @@ make_pizza('mushrooms', 'green peppers', 'extra cheese')
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 def make_pizza(*toppings):
-    print("\nMaking a pizza with the following toppings:")
     for topping in toppings:
         print("- " + topping)
 
@@ -102,10 +101,8 @@ make_pizza('mushrooms', 'green peppers', 'extra cheese')
 </code></pre>
                     </div>
                     <div class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
-Making a pizza with the following toppings:
+                        <pre><code class="output" data-trim contenteditable>
 - pepperoni
-Making a pizza with the following toppings:
 - mushrooms
 - green peppers
 - extra cheese
@@ -124,8 +121,7 @@ Making a pizza with the following toppings:
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 def make_pizza(size, *toppings):
-    print("\nMaking a " + str(size) +
-        "-inch pizza with the following toppings:")
+    print(str(size) + "-inch pizza:")
     for topping in toppings:
         print("- " + topping)
 
@@ -134,11 +130,10 @@ make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
 </code></pre>
                     </div>
                     <div class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
-Making a 16-inch pizza with the following toppings:
+                        <pre><code class="output" data-trim contenteditable>
+16-inch pizza:
 - pepperoni
-
-Making a 12-inch pizza with the following toppings:
+12-inch pizza:
 - mushrooms
 - green peppers
 - extra cheese
@@ -160,30 +155,10 @@ build_profile(location='Shanghai',field='Management')
 </code></pre>
                     </div>
                     <div class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
+                        <pre><code class="output" data-trim contenteditable>
 {'location': 'Shanghai', 'field': 'Management'}
 </code></pre>
                     </div>
-                    <ul>
-                        <li class="fragment">
-                            <p>It builds up a dictionary.</p>
-                        </li>
-                    </ul>
-                    <div class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
-def build_profile(**user_info):
-    profile={}
-    for key, value in user_info.items():
-        profile[key] = value
-    return profile
-
-user_profile = build_profile(location='Shanghai',
-                            field='Management')
-print(user_profile)
-</code></pre>
-                    </div>
-                </section>
-                <section>
                     <ul>
                         <li class="fragment">
                             <p>Using Arbitrary Keyword Arguments</p>
@@ -192,12 +167,9 @@ print(user_profile)
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 def build_profile(first, last, **user_info):
-    profile = {}
-    profile['first_name'] = first
-    profile['last_name'] = last
     for key, value in user_info.items():
         profile[key] = value
-    return profile
+    return first, last, profile
 
 user_profile = build_profile('albert', 'einstein',
                             location='princeton',
@@ -206,9 +178,9 @@ print(user_profile)
 </code></pre>
                     </div>
                     <div class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
-{'first_name': 'albert', 'last_name': 'einstein',
-'location': 'princeton', 'field': 'physics'}
+                        <pre><code class="output" data-trim contenteditable>
+('albert', 'einstein', 
+{'location': 'princeton', 'field': 'physics'})
 </code></pre>
                     </div>
                 </section>
@@ -225,7 +197,7 @@ build_profile('albert', 'einstein',
 </code></pre>
                     </div>
                     <div class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
+                        <pre><code class="output" data-trim contenteditable>
 ('albert', 'einstein')
 {'location': 'princeton', 'field': 'physics'}
 </code></pre>
@@ -237,7 +209,7 @@ build_profile('albert', 'einstein',
                     </ul>
                 </section>
                 <section data-background-image="bg.png">
-                    <div id="left">
+                    <div class="div-c">
                         <ul>
                             <li class="fragment">
                                 <p>Example</p>
@@ -247,10 +219,7 @@ build_profile('albert', 'einstein',
                             <pre><code class="line-numbers" data-trim contenteditable>
 def test(x,y=1,*a,**b):
     print(x,y,a,b)
-</code></pre>
-                        </div>
-                        <div class="fragment">
-                            <pre><code class="line-numbers" data-trim contenteditable>
+
 test(1)
 test(1,2)
 test(1,2,3)
@@ -259,17 +228,20 @@ test(x=1,y=2)
 test(1,a=2)
 test(1,2,3,a=4)
 test(1,2,3,y=4)
+
 </code></pre>
                         </div>
                     </div>
-                    <div id="right">
+                    <div class="div-d">
                         <ul>
                             <li class="fragment">
                                 <p>Result</p>
                             </li>
                         </ul>
                         <div class="fragment">
-                            <pre><code class="line-numbers" data-trim contenteditable>
+                            <pre><code class="output" contenteditable>
+
+
 1 1 () {}
 1 2 () {}
 1 2 (3,) {}
@@ -277,10 +249,7 @@ test(1,2,3,y=4)
 1 2 () {}
 1 1 () {'a': 2}
 1 2 (3,) {'a': 4}
-Traceback (most recent call last):
-  File "test.py", line 11, in <module>
-    test(1,2,3,y=4)
-TypeError: test() got multiple values for argument 'y'
+TypeError: test() got multiple values
 </code></pre>
                         </div>
                     </div>
@@ -353,9 +322,7 @@ def test4():
                     </ul>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
->>> L = [x * x for x in range(4)]
->>> L
-[0, 1, 4, 9]
+>>> L = [x * x for x in range(4)] #list [0,1,4,9]
 >>> g = (x * x for x in range(4)) #not tuple!
 >>> g
 <generator object <genexpr> at 0x1022ef630>
@@ -370,7 +337,6 @@ def test4():
 9
 >>> next(g)
 Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
 StopIteration
 </code></pre>
                     </div>
@@ -383,44 +349,42 @@ for n in g:
                     </div>
                 </section>
                 <section>
-                    <div class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
-def yrange(n):
-    i = 0
-    while i < n:
-        print(i) 
-        i += 1 # i=i+1
-
-yrange(5)
-</code></pre>
-                    </div>
-                    <div class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
+                    <div class="div-c">
+                        <div class="fragment">
+                            <pre><code class="line-numbers" data-trim contenteditable>
 def yrange(n):
     i = 0
     while i < n:
         yield i
-        i += 1 
+        i=i+1 
+
 
 o = yrange(5)
-
-print(next(o))
-# output: 0
-
-print(next(o))
-# output: 1
-
-print(next(o))
-# output: 2
 </code></pre>
+                        </div>
                     </div>
+                    <div class="div-d">
+                        <div class="fragment">
+                            <pre><code class="line-numbers" data-trim contenteditable>
+>>> print(next(o))
+0
+
+>>> print(next(o))
+1
+
+>>> print(next(o))
+2
+</code></pre>
+                        </div>
+                    </div>
+                    <p class="fragment">Usually we use for iteration to collect the data.</p>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 def yrange(n):
     i = 0
     while i < n:
         yield i
-        i += 1 
+        i=i+1 
 
 for x in yrange(5):
     print(x)
@@ -439,16 +403,17 @@ def f(x):
     return x * x
 
 y = map(f, [1, 2, 3, 4, 5, 6, 7, 8, 9])    
-print(type(y))
 print(list(y))
-
-map
+</code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre><code class="output" data-trim contenteditable>
 [1, 4, 9, 16, 25, 36, 49, 64, 81]
 </code></pre>
                     </div>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
-print(list(map(str, [1, 2, 3, 4, 5, 6, 7, 8, 9])))
+>>> print(list(map(str, [1, 2, 3, 4, 5, 6, 7, 8, 9])))
 ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 </code></pre>
                     </div>
@@ -464,6 +429,10 @@ lambda x, y: x + y
  
 lambda x, y = 2: x + y
 lambda *z: z
+</code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
  
 >>> a = lambda x, y: x + y
 >>> a( 1, 3 )
@@ -509,152 +478,292 @@ def f(x):
             </section>
             <section>
                 <section data-background="#2980b9" style="color: white">
-                    <h2 style="color: white">7.2 Functions (4)</h2>
-                    <p>Return a function, Recursion Intro</p>
+                    <h2 style="color: white">7.2 Modules</h2>
                 </section>
                 <section>
                     <ul>
-                        <li class="fragment">Return a function</li>
+                        <li class="fragment">
+                            <p>Module is a Python file, followed with .py</p>
+                        </li>
+                        <li class="fragment">
+                            <p>Storing Your Functions in Modules</p>
+                        </li>
                     </ul>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
-def calc_sum(*args):
-    ax = 0
-    for n in args:
-        ax = ax + n
-    return ax
+def make_pizza(size, *toppings):
+    print("\nMaking a " + str(size) +
+        "-inch pizza with the following toppings:")
+    for topping in toppings:
+        print("- " + topping)
 </code></pre>
                     </div>
+                    <ul>
+                        <li class="fragment">
+                            <p>It is saved as "pizza.py" file.</p>
+                        </li>
+                        <li class="fragment">
+                            <p>We make a separate file called making_pizzas.py in the same directory as pizza.py.</p>
+                        </li>
+                    </ul>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
-def lazy_sum(*args):
-    def sum():
-        ax = 0
-        for n in args:
-            ax = ax + n
-        return ax
-    return sum
+import pizza
 
-f = lazy_sum(1, 3, 5, 7, 9)
-print(f()) # print(f) causes error
-print(type(f)) # delete lazy_sum, f still exists.
-
-25
-function
-</code></pre>
-                    </div>
-                    <div class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
-f1 = lazy_sum(1, 3, 5, 7, 9)
-f2 = lazy_sum(1, 3, 5, 7, 9)
-print(f1==f2)
-
-#output
-False
+pizza.make_pizza(16, 'pepperoni')
+pizza.make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
 </code></pre>
                     </div>
                 </section>
                 <section>
                     <ul>
                         <li class="fragment">
-                            <p>Defining a closure function</p>
-                        </li>
-                        <li class="fragment">
-                            <p>When do we have a closure?</p>
-                            <ul>
-                                <li class="fragment">
-                                    <p>We must have a nested function (function inside a function).</p>
-                                </li>
-                                <li class="fragment">
-                                    <p>The nested function must refer to a value defined in the enclosing function.</p>
-                                </li>
-                                <li class="fragment">
-                                    <p>The enclosing function must return the nested function.</p>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="fragment">
-                            <p>When to use closures?</p>
-                            <ul>
-                                <li class="fragment">
-                                    <p>Closures can avoid the use of global values and provides some form of data hiding. It can also provide an object oriented solution to the problem.</p>
-                                </li>
-                            </ul>
+                            <p>Importing Specific Functions</p>
                         </li>
                     </ul>
-                </section>
-                <section>
-                    <h3>Example</h3>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
-def print_msg():
-    msg = "zen of python"
-    def printer():
-        return msg
-    return printer
+from module_name import function_name
 
-another = print_msg()
-print(another())
+from module_name import function_0, function_1, function_2
+
 </code></pre>
                     </div>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
-def make_multiplier_of(n):
-    def multiplier(x):
-        return x * n
-    return multiplier
+from pizza import make_pizza
 
-# Multiplier of 3
-times3 = make_multiplier_of(3)
-
-# Multiplier of 5
-times5 = make_multiplier_of(5)
-
-# Output: 27
-print(times3(9))
-
-# Output: 15
-print(times5(3))
-
-# Output: 30
-print(times5(times3(2)))
+make_pizza(16, 'pepperoni')
+make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
 </code></pre>
                     </div>
                 </section>
                 <section>
-                    <h3>Recursion Brief Intro</h3>
                     <ul>
                         <li class="fragment">
-                            <p>Calculate: Factorial $n!$</p>
+                            <p>Using as to Give a Function an Alias</p>
                         </li>
                     </ul>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
-def fact(n):
-    if n==1:
-        return 1
+from pizza import make_pizza as mp
+mp(16, 'pepperoni')
+mp(12, 'mushrooms', 'green peppers', 'extra cheese')
+</code></pre>
+                    </div>
+                    <ul>
+                        <li class="fragment">
+                            <p>Using as to Give a Module an Alias</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+import pizza as p
+p.make_pizza(16, 'pepperoni')
+p.make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
+</code></pre>
+                    </div>
+                </section>
+                <section>
+                    <ul>
+                        <li class="fragment">
+                            <p>Importing All Functions in a Module</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+from pizza import *
+make_pizza(16, 'pepperoni')
+make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
+</code></pre>
+                    </div>
+                    <ul>
+                        <li class="fragment">
+                            <p>The asterisk in the import statement tells Python to copy every function from the module pizza into this program file. Because every function is imported, you can call each function by name without using the dot notation.
+                            </p>
+                        </li>
+                        <li class="fragment">
+                            <p>However, it's best not to use this approach when you're working with larger modules that you didn't write: if the module has a function name that matches an existing name in your project, you can get some unexpected results.
+                            </p>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Search for Modules</h3>
+                    <ul>
+                        <li class="fragment">
+                            <p>When a module named is imported, the interpreter first searches for a built-in module with that name. If not found, it then searches for a file named xxx.py in a list of directories given by the variable sys.path. sys.path is initialized from these locations:</p>
+                        </li>
+                        <li class="fragment">
+                            <p>The directory containing the input script (or the current directory when no file is specified).</p>
+                        </li>
+                        <li class="fragment">
+                            <p>PYTHONPATH (a list of directory names, with the same syntax as the shell variable PATH).</p>
+                        </li>
+                        <li class="fragment">
+                            <p>The installation-dependent default.</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+import sys
+print(sys.path)
+</code></pre>
+                    </div>
+                </section>
+                <section>
+                    <h3>Packages</h3>
+                    <ul>
+                        <li class="fragment">
+                            <p>Packages are namespaces which contain multiple packages and modules themselves. They are simply directories, but with a twist.</p>
+                        </li>
+                        <li class="fragment">
+                            <p>Each package in Python is a directory which <b>MUST</b> contain a special file called <b>__init__.py</b>. This file can be empty, and it indicates that the directory it contains is a Python package, so it can be imported the same way a module can be imported.</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+mycompany
+├─ __init__.py
+├─ abc.py
+└─ xyz.py
+</code></pre>
+                    </div>
+                    <ul>
+                        <li class="fragment">
+                            <p>The name of modules are mycompany.abc and mycompany.xyz</p>
+                        </li>
+                        <li class="fragment">
+                            <p><b>Be careful! The name of modules you created should not be in conflict with the name of any system module, or any build-in function.</b></p>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <ul>
+                        <li class="fragment">
+                            <p>Private functions in modules, _xxx, __xxx</p>
+                        </li>
+                    </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def _private_1(name):
+    return 'Hello, %s' % name
+
+def _private_2(name):
+    return 'Hi, %s' % name
+
+def greeting(name):
+    if len(name) > 3:
+        return _private_1(name)
     else:
-        return n * fact(n - 1)
+        return _private_2(name)
+</code></pre>
+                    </div>
+                    <ul>
+                        <li class="fragment">
+                            <p><b>You can use those functions, but you would better not use.</b></p>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Third party modules</h3>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+import urllib
+dir(urllib)
+</code></pre>
+                    </div>
+                    <ul>
+                        <li class="fragment">
+                            <p>For Python only, open the <b>cmd</b>.</p>
+                        </li>
+                        <div class="fragment">
+                            <pre><code class="line-numbers" data-trim contenteditable>
+pip install pillow
+</code></pre>
+                        </div>
+                        <li class="fragment">
+                            <p>For Anaconda only, open the <b>anaconda prompt</b>.</p>
+                        </li>
+                        <div class="fragment">
+                            <pre><code class="line-numbers" data-trim contenteditable>
+conda install pillow
+</code></pre>
+                        </div>
+                        <li class="fragment">
+                            <p>If you want to use both the Python and Anaconda, there might be some conflicts. Thus, please change file name in the Anaconda. D:\Anaconda\Scripts, pip.exe and pip-script.exe to <b>condapip.exe</b> and <b>condapip-script.exe</b></p>
+                        </li>
+                        <div class="fragment">
+                            <pre><code class="line-numbers" data-trim contenteditable>
+condapip install pillow #anaconda
+</code></pre>
+                        </div>
+                    </ul>
+                </section>
+                <section>
+                	<h5>Uninstall the package</h5>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+pip uninstall pillow
+conda uninstall pillow5
+</code></pre>
+                    </div>
+                    <h5 class="fragment">List all the packages</h5>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+pip list
+conda list
+</code></pre>
+                    </div>
+                    <h5 class="fragment">Examples</h5>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+conda install you-get 
+conda install pyperclip
+conda install itchat 
+</code></pre>
+                    </div>
+                                        <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+import pyperclip
+pyperclip.copy("abc")
+</code></pre>
+                    </div>
+                </section>
+                <section>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+import itchat
+itchat.auto_login()
+
+friends = itchat.get_friends(update=True)[0:]
+
 </code></pre>
                     </div>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
-===> fact(5)
-===> 5 * fact(4)
-===> 5 * (4 * fact(3))
-===> 5 * (4 * (3 * fact(2)))
-===> 5 * (4 * (3 * (2 * fact(1))))
-===> 5 * (4 * (3 * (2 * 1)))
-===> 5 * (4 * (3 * 2))
-===> 5 * (4 * 6)
-===> 5 * 24
-===> 120
+male = 0
+female = 0
+other = 0
+for i in friends[1:]:
+    sex = i['Sex']
+    if sex == 1:
+        male = male + 1
+    elif sex ==2:
+        female = female + 1
+    else:
+        other = other + 1
+total = len(friends[1:])
+
+print('男性好友： {}%'.format(male/total*100))
+print('女性好友： {}%'.format(female/total*100)) 
+print('其他： {}%' .format(other/total*100))
+
+itchat.logout() 
 </code></pre>
                     </div>
                 </section>
             </section>
-
-            
             <section>
                 <section data-background="#2c3e50" style="color: white; text-align: left;">
                     <h2 style="color: white">Summary</h2>
