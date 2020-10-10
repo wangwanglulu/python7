@@ -518,32 +518,78 @@ pizza.make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
                 <section>
                     <ul>
                         <li class="fragment">
-                            <p>Importing Specific Functions</p>
+                            <p><b>Be Careful!</b></p>
                         </li>
                     </ul>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
-from module_name import function_name
+def make_pizza(size, *toppings):
+    print("\nMaking a " + str(size) +
+        "-inch pizza with the following toppings:")
+    for topping in toppings:
+        print("- " + topping)
 
-from module_name import function_0, function_1, function_2
+pizza.make_pizza(16, 'pepperoni')
 
+#saved as pizza.py
 </code></pre>
                     </div>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
-from pizza import make_pizza
+import pizza
 
-make_pizza(16, 'pepperoni')
-make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
+#in another python file
+</code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre><code class="output" data-trim contenteditable>
+Making a 16-inch pizza with the following toppings:
+- pepperoni
 </code></pre>
                     </div>
                 </section>
                 <section>
                     <ul>
                         <li class="fragment">
-                            <p>Using as to Give a Function an Alias</p>
+                            <p><b>A way to solve it</b></p>
                         </li>
                     </ul>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+def make_pizza(size, *toppings):
+    print("\nMaking a " + str(size) +
+        "-inch pizza with the following toppings:")
+    for topping in toppings:
+        print("- " + topping)
+
+if __name__ == '__main__': 
+    pizza.make_pizza(16, 'pepperoni')
+
+#saved as pizza.py
+</code></pre>
+                    </div>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+import pizza
+
+#in another python file
+</code></pre>
+                    </div>
+                </section>
+                <section>
+                    <p class="fragment">Importing Specific Functions</p>
+                    <div class="fragment">
+                        <pre><code class="line-numbers" data-trim contenteditable>
+#from module_name import function_name
+#from module_name import function_0, function_1, function_2
+
+from pizza import make_pizza
+
+make_pizza(16, 'pepperoni')
+make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
+</code></pre>
+                    </div>
+                    <p class="fragment">Using as to Give a Function an Alias</p>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 from pizza import make_pizza as mp
@@ -551,11 +597,7 @@ mp(16, 'pepperoni')
 mp(12, 'mushrooms', 'green peppers', 'extra cheese')
 </code></pre>
                     </div>
-                    <ul>
-                        <li class="fragment">
-                            <p>Using as to Give a Module an Alias</p>
-                        </li>
-                    </ul>
+                    <p class="fragment">Using as to Give a Module an Alias</p>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 import pizza as p
@@ -701,7 +743,7 @@ condapip install pillow #anaconda
                     </ul>
                 </section>
                 <section>
-                	<h5>Uninstall the package</h5>
+                    <h5>Uninstall the package</h5>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 pip uninstall pillow
@@ -723,7 +765,7 @@ conda install pyperclip
 conda install itchat 
 </code></pre>
                     </div>
-                                        <div class="fragment">
+                    <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 import pyperclip
 pyperclip.copy("abc")
