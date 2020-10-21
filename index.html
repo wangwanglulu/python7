@@ -30,7 +30,7 @@
             <section>
                 <section data-background="#2980b9" style="color: white">
                     <h2 style="color: white">7.1 Functions (3)</h2>
-                    <h5>arbitrary arguments, generator, Lambda function</h5>
+                    <h5>arbitrary arguments, Lambda function</h5>
                 </section>
                 <section>
                     <div class="fragment">
@@ -255,6 +255,7 @@ TypeError: test() got multiple values
                     </div>
                 </section>
                 <section>
+                    <h5>List Comprehensions</h5>
                     <ul>
                         <li class="fragment">
                             <p>Four ways of creating a list</p>
@@ -311,83 +312,6 @@ def test4():
 >>> L = ['Hello', 'World', 'IBM', 'Apple']
 >>> [s.lower() for s in L]
 ['hello', 'world', 'ibm', 'apple']
-</code></pre>
-                    </div>
-                </section>
-                <section>
-                    <ul>
-                        <li class="fragment">
-                            <p>Generator</p>
-                        </li>
-                    </ul>
-                    <div class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
->>> L = [x * x for x in range(4)] #list [0,1,4,9]
->>> g = (x * x for x in range(4)) #not tuple!
->>> g
-<generator object <genexpr> at 0x1022ef630>
-
->>> next(g)
-0
->>> next(g)
-1
->>> next(g)
-4
->>> next(g)
-9
->>> next(g)
-Traceback (most recent call last):
-StopIteration
-</code></pre>
-                    </div>
-                    <div class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
-g = (x * x for x in range(10))
-for n in g:
-    print(n)
-</code></pre>
-                    </div>
-                </section>
-                <section>
-                    <div class="div-c">
-                        <div class="fragment">
-                            <pre><code class="line-numbers" data-trim contenteditable>
-def yrange(n):
-    i = 0
-    while i < n:
-        yield i
-        i=i+1 
-
-
-o = yrange(5)
-</code></pre>
-                        </div>
-                    </div>
-                    <div class="div-d">
-                        <div class="fragment">
-                            <pre><code class="line-numbers" data-trim contenteditable>
->>> print(next(o))
-0
-
->>> print(next(o))
-1
-
->>> print(next(o))
-2
-</code></pre>
-                        </div>
-                    </div>
-                    <p class="fragment">Usually we use for iteration to collect the data.</p>
-                    <div class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
-def yrange(n):
-    i = 0
-    while i < n:
-        yield i
-        i=i+1 
-
-for x in yrange(5):
-    print(x)
 </code></pre>
                     </div>
                 </section>
@@ -469,9 +393,6 @@ print ("The total is : ", sum( 20, 20 ))
                         <pre><code class="line-numbers" data-trim contenteditable>
 >>> list(map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
 [1, 4, 9, 16, 25, 36, 49, 64, 81]
-
-def f(x):
-    return x * x
 </code></pre>
                     </div>
                 </section>
@@ -681,33 +602,6 @@ mycompany
                     </ul>
                 </section>
                 <section>
-                    <ul>
-                        <li class="fragment">
-                            <p>Private functions in modules, _xxx, __xxx</p>
-                        </li>
-                    </ul>
-                    <div class="fragment">
-                        <pre><code class="line-numbers" data-trim contenteditable>
-def _private_1(name):
-    return 'Hello, %s' % name
-
-def _private_2(name):
-    return 'Hi, %s' % name
-
-def greeting(name):
-    if len(name) > 3:
-        return _private_1(name)
-    else:
-        return _private_2(name)
-</code></pre>
-                    </div>
-                    <ul>
-                        <li class="fragment">
-                            <p><b>You can use those functions, but you would better not use.</b></p>
-                        </li>
-                    </ul>
-                </section>
-                <section>
                     <h3>Third party modules</h3>
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
@@ -730,6 +624,7 @@ pip install pillow
                         <div class="fragment">
                             <pre><code class="line-numbers" data-trim contenteditable>
 conda install pillow
+pip install pillow
 </code></pre>
                         </div>
                         <li class="fragment">
@@ -747,7 +642,7 @@ condapip install pillow #anaconda
                     <div class="fragment">
                         <pre><code class="line-numbers" data-trim contenteditable>
 pip uninstall pillow
-conda uninstall pillow5
+conda uninstall pillow
 </code></pre>
                     </div>
                     <h5 class="fragment">List all the packages</h5>
